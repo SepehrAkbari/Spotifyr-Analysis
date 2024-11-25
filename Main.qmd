@@ -144,15 +144,31 @@ pink_floyd_albums_tidy <- pink_floyd_albums %>%
 ```
 
 ```{r}
+#| message: false
+#| warning: false
+#| filename: ""
+
 ggplot(
   pink_floyd_albums_tidy,
   aes(x = album_release_year, 
-      y = value, 
-      color = feature)
+      y = value,
+      color = feature,
+      group = feature)
 ) +
-  geom_point() +
-  geom_smooth(method = "lm",
-              se = FALSE) +
+  geom_point(size = 2) +
+  geom_smooth(se = FALSE) +
+  geom_vline(
+    aes(xintercept = 1969), 
+    color = "#020307",
+    linewidth = 0.75,
+    alpha = 0.75
+  ) +
+  annotate("text", 
+           x = 1969 + 1.33, 
+           y = 0.6 + 0.01, 
+           label = "—— Barrett Leaves", 
+           color = "#020307",
+           alpha = 0.85) +
   labs(
     title = "Pink Floyd's stats Over Time",
     x = "Release Year",
@@ -161,78 +177,9 @@ ggplot(
   ) +
   theme_minimal() +
   theme(legend.position = "top") +
-  scale_color_brewer(palette = "Dark2") 
+  scale_color_brewer(palette = "Dark2",
+                     labels = c("Energy", "Valence", "Instrumentalness")) 
 ```
-
-```{r}
-ggplot(
-  pink_floyd_albums_tidy,
-  aes(x = album_release_year, 
-      y = value, 
-      color = feature, 
-      group = feature)
-) +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE) +
-  geom_vline(
-    xintercept = c(1968, 1969),  # Add key years for transitions
-    linetype = "dashed",
-    color = "gray",
-    size = 0.8
-  ) +
-  annotate(
-    "text", x = 1968.5, y = max(pink_floyd_albums_tidy$value), 
-    label = "Syd Barrett Departs", color = "gray", angle = 90, vjust = -0.5
-  ) +
-  labs(
-    title = "Pink Floyd's Stats Over Time",
-    x = "Release Year",
-    y = NULL,
-    color = NULL
-  ) +
-  theme_minimal() +
-  theme(legend.position = "top") +
-  scale_color_brewer(palette = "Dark2")
-```
-
-```{r}
-ggplot(
-  pink_floyd_albums_tidy,
-  aes(x = album_release_year, 
-      y = value, 
-      color = feature)
-) +
-  geom_point() +
-  geom_smooth(se = FALSE) +
-  facet_wrap(~feature) +
-  annotate(
-    "rect",
-    xmin = 1967, xmax = 1969,
-    ymin = -Inf, ymax = Inf,
-    alpha = 0.2, fill = "#e7298a"  
-  ) +
-  annotate(
-    "rect",
-    xmin = 1969, xmax = 1983,
-    ymin = -Inf, ymax = Inf,
-    alpha = 0.2, fill = "#e6ab02"
-  ) +
-  labs(
-    title = "Pink Floyd's Stats Over Time",
-    x = "Release Year",
-    y = NULL,
-    color = NULL,
-    fill = "Era"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "top") +
-  scale_color_brewer(
-    palette = "Dark2",
-    labels = c("Energy", "Valence", "Instrumentalness") 
-  )
-```
-
-
 
 ### Energy
 
@@ -309,7 +256,55 @@ ggplot(
   theme(legend.position = "top")
 ```
 
+### Overview
+
+```{r}
+#| message: false
+#| warning: false
+#| filename: ""
+
+pink_floyd_overview <- pink_floyd_albums %>%
+  group_by(era) %>%
+  summarize(
+    avg_energy = mean(avg_energy),
+    avg_valence = mean(avg_valence),
+    avg_instrumentalness = mean(avg_instrumentalness)
+  )
+
+change_row <- pink_floyd_overview %>%
+  summarize(
+    era = "Change",
+    avg_energy = diff(avg_energy),
+    avg_valence = diff(avg_valence),
+    avg_instrumentalness = diff(avg_instrumentalness)
+  ) 
+
+pink_floyd_overview <- bind_rows(pink_floyd_overview, change_row)
+```
+
+```{r}
+pink_floyd_overview %>% 
+  gt() %>% 
+  tab_header(
+    title = "Pink Floyd's Musical Evolution",
+    subtitle = "Average Audio Features by Era"
+  ) %>%
+  cols_label(
+    avg_energy = "Energy",
+    avg_valence = "Valence",
+    avg_instrumentalness = "Instrumentalness",
+    era = ""
+  ) %>% 
+  tab_options(
+    column_labels.padding.horizontal = px(50), 
+    data_row.padding.horizontal = px(50)
+  )
+```
+
+
 ## Significance Testing
+
+
 
 ## Conclusion
 
