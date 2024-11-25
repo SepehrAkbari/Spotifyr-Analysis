@@ -1,0 +1,336 @@
+---
+title: "Two Faces of the Moon"
+subtitle: "Pink Floyd’s Evolution Before and After Syd Barrett"
+author: "Sepehr Akbari"
+date: "2024-12-11"
+abstract: "How did Syd Barrett’s departure shape the evolution of Pink Floyd’s sound, as reflected in key musical features such as energy, mood, and instrumentation, and what does this reveal about the band’s artistic transformation?"
+format:
+  html:
+    theme: united
+    toc: true
+    code-fold: true
+    abstract-title: "Research Focus"
+embed-resources: true
+chunk_output_type: console
+editor_options: 
+  chunk_output_type: console
+---
+
+## Setup
+
+```{r}
+#| message: false
+#| warning: false
+#| filename: "packages & libraries"
+
+library(dotenv) # for loading environment variables
+library(gt) # for creating neater tables
+library(spotifyr) # for accessing Spotify API
+library(tidyverse) # for data manipulation and visualization
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| filename: "API setup"
+
+dotenv::load_dot_env()
+
+Sys.setenv(SPOTIFY_CLIENT_ID = Sys.getenv("SPOTIFY_CLIENT_ID"))
+Sys.setenv(SPOTIFY_CLIENT_SECRET = Sys.getenv("SPOTIFY_CLIENT_SECRET"))
+
+access_token <- get_spotify_access_token()
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| filename: "loading data"
+
+pink_floyd <- get_artist_audio_features("Pink Floyd")
+```
+
+## Introduction
+
+For rock enthusiasts, Pink Floyd needs no introduction—nor does their legendary guitarist Syd Barrett, whose creative genius shaped the band’s early sound. Barrett’s departure, however, was more than celebrity drama; it marked one of rock’s most defining moments, transforming Pink Floyd from a psychedelic rock band into a progressive rock powerhouse.
+
+This project delves into this revolution by analyzing three key musical features: *energy, valence, and instrumentalness*. Energy reflects the intensity of their tracks, valence captures the emotional tone, and instrumentalness highlights their shift toward complex, instrumental-heavy compositions. Together, these features offer a data-driven perspective on the iconic observations that Pink Floyd fans have long debated, shedding light on how one of rock’s most remarkable transformations unfolded.
+
+**Null Hypothesis ($H_0$):** There is no significant difference in energy, valence, and instrumentalness between Pink Floyd’s pre- and post-Barrett eras.
+
+**Alternative Hypothesis ($H_1$):** There is a significant difference in energy, valence, and instrumentalness between Pink Floyd’s pre- and post-Barrett eras.
+
+## Data Exploration
+
+First, we clean the data to include only original studio albums, excluding remixes, live concerts, and compilations. The dataset is further limited to albums released before Roger Waters left the band in 1985, marking the group’s breakup. Unnecessary columns are also removed to focus on relevant musical features for analysis.
+
+```{r}
+#| message: false
+#| warning: false
+#| filename: "cleaning data"
+
+albums <- c("The Piper at the Gates of Dawn",
+            "A Saucerful of Secrets",
+            "More",
+            "Ummagumma",
+            "Atom Heart Mother",
+            "Meddle",
+            "Obscured by Clouds",
+            "The Dark Side of the Moon",
+            "Wish You Were Here",
+            "Animals",
+            "The Wall",
+            "The Final Cut",
+            "A Momentary Lapse of Reason",
+            "The Division Bell",
+            "The Endless River")
+
+pink_floyd <- pink_floyd %>% 
+  filter(album_name %in% albums) %>% 
+  select("album_name",
+         "album_release_year",
+         "track_name",
+         "duration_ms",
+         "explicit",
+         danceability:tempo,
+         key_name:key_mode) %>% 
+  filter(album_release_year <= 1985)
+```
+
+Syd Barrett officially left the band in 1968, but *More (1969)* is often seen as an album heavily influenced by Barrett’s style, even though he did not actively contribute to it. On the other hand, *Ummagumma (1969)* is widely regarded as an experimental project rather than a cohesive Pink Floyd album, as each band member contributed their own solo works. For these reasons, *More* is included in the pre-Barrett era, while *Ummagumma* is excluded from the analysis, to ensure our conclusion is as accurate as possible.
+
+```{r}
+#| message: false
+#| warning: false
+#| filename: "defining eras"
+
+pre_barrett_albums <- c("The Piper at the Gates of Dawn",
+                        "A Saucerful of Secrets",
+                        "More")
+
+pink_floyd <- pink_floyd %>% 
+  filter(album_name != "Ummagumma") %>% 
+  mutate(era = case_when(
+    album_name %in% pre_barrett_albums ~ "Pre-Barrett",
+    TRUE ~ "Post-Barrett"
+  ))
+```
+
+Before starting to analyze `energy`, `valence`, and `instrumentalness`, let’s calculate their average for each album. As Pink Floyd’s concept albums tell cohesive stories, these averages provide a clearer view of their musical evolution over time.
+
+```{r}
+#| message: false
+#| warning: false
+#| filename: "album averages"
+
+pink_floyd_albums <- pink_floyd %>%
+  group_by(album_name, album_release_year, era) %>%
+  summarize(
+    avg_energy = mean(energy),
+    avg_valence = mean(valence),
+    avg_instrumentalness = mean(instrumentalness),
+  )
+```
+
+## Analysis
+
+```{r}
+pink_floyd_albums_tidy <- pink_floyd_albums %>%
+  pivot_longer(
+    cols = starts_with("avg"), 
+    names_to = "feature", 
+    values_to = "value"
+  )
+```
+
+```{r}
+ggplot(
+  pink_floyd_albums_tidy,
+  aes(x = album_release_year, 
+      y = value, 
+      color = feature)
+) +
+  geom_point() +
+  geom_smooth(method = "lm",
+              se = FALSE) +
+  labs(
+    title = "Pink Floyd's stats Over Time",
+    x = "Release Year",
+    y = NULL,
+    color = NULL
+  ) +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  scale_color_brewer(palette = "Dark2") 
+```
+
+```{r}
+ggplot(
+  pink_floyd_albums_tidy,
+  aes(x = album_release_year, 
+      y = value, 
+      color = feature, 
+      group = feature)
+) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_vline(
+    xintercept = c(1968, 1969),  # Add key years for transitions
+    linetype = "dashed",
+    color = "gray",
+    size = 0.8
+  ) +
+  annotate(
+    "text", x = 1968.5, y = max(pink_floyd_albums_tidy$value), 
+    label = "Syd Barrett Departs", color = "gray", angle = 90, vjust = -0.5
+  ) +
+  labs(
+    title = "Pink Floyd's Stats Over Time",
+    x = "Release Year",
+    y = NULL,
+    color = NULL
+  ) +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  scale_color_brewer(palette = "Dark2")
+```
+
+```{r}
+ggplot(
+  pink_floyd_albums_tidy,
+  aes(x = album_release_year, 
+      y = value, 
+      color = feature)
+) +
+  geom_point() +
+  geom_smooth(se = FALSE) +
+  facet_wrap(~feature) +
+  annotate(
+    "rect",
+    xmin = 1967, xmax = 1969,
+    ymin = -Inf, ymax = Inf,
+    alpha = 0.2, fill = "#e7298a"  
+  ) +
+  annotate(
+    "rect",
+    xmin = 1969, xmax = 1983,
+    ymin = -Inf, ymax = Inf,
+    alpha = 0.2, fill = "#e6ab02"
+  ) +
+  labs(
+    title = "Pink Floyd's Stats Over Time",
+    x = "Release Year",
+    y = NULL,
+    color = NULL,
+    fill = "Era"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  scale_color_brewer(
+    palette = "Dark2",
+    labels = c("Energy", "Valence", "Instrumentalness") 
+  )
+```
+
+
+
+### Energy
+
+```{r}
+#| message: false
+#| warning: false
+#| filename: ""
+
+ggplot(
+  pink_floyd_albums, 
+  aes(x = avg_energy, 
+      y = reorder(album_name, avg_energy), 
+      fill = era)
+) +
+  geom_col() +
+  labs(
+    title = "Average Energy Levels by Album",
+    x = "Energy Level",
+    y = NULL,
+    fill = NULL
+  ) +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Dark2") +
+  theme(legend.position = "top")
+```
+
+### Valence
+
+```{r}
+#| message: false
+#| warning: false
+#| filename: ""
+
+ggplot(
+  pink_floyd_albums, 
+  aes(x = avg_valence, 
+      y = reorder(album_name, avg_valence), 
+      fill = era)
+) +
+  geom_col() +
+  labs(
+    title = "Average Valence Levels by Album",
+    x = "Valence Level",
+    y = NULL,
+    fill = NULL
+  ) +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Dark2") +
+  theme(legend.position = "top")
+```
+
+### Instrumentalness
+
+```{r}
+#| message: false
+#| warning: false
+#| filename: ""
+
+ggplot(
+  pink_floyd_albums, 
+  aes(x = avg_instrumentalness, 
+      y = reorder(album_name, avg_instrumentalness), 
+      fill = era)
+) +
+  geom_col() +
+  labs(
+    title = "Average Instrumentalness Levels by Album",
+    x = "Instrumentalness Level",
+    y = NULL,
+    fill = NULL
+  ) +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Dark2") +
+  theme(legend.position = "top")
+```
+
+## Significance Testing
+
+## Conclusion
+
+## References
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
