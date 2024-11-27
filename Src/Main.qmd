@@ -27,6 +27,7 @@ library(dotenv) # for loading environment variables
 library(gt) # for creating neater tables
 library(spotifyr) # for accessing Spotify API
 library(tidyverse) # for data manipulation and visualization
+library(splines)
 ```
 
 ```{r}
@@ -156,19 +157,12 @@ ggplot(
       group = feature)
 ) +
   geom_point(size = 2) +
-  geom_smooth(se = FALSE) +
+  geom_smooth(se = FALSE,
+              method = "lm",
+              formula = y ~ ns(x, 3)) +
   geom_vline(
     aes(xintercept = 1969), 
-    color = "#020307",
-    linewidth = 0.75,
-    alpha = 0.75
-  ) +
-  annotate("text", 
-           x = 1969 + 1.33, 
-           y = 0.6 + 0.01, 
-           label = "—— Barrett Leaves", 
-           color = "#020307",
-           alpha = 0.85) +
+    linetype = "dashed") +
   labs(
     title = "Pink Floyd's stats Over Time",
     x = "Release Year",
@@ -179,6 +173,7 @@ ggplot(
   theme(legend.position = "top") +
   scale_color_brewer(palette = "Dark2",
                      labels = c("Energy", "Valence", "Instrumentalness")) 
+
 ```
 
 ### Energy
@@ -303,8 +298,6 @@ pink_floyd_overview %>%
 
 
 ## Significance Testing
-
-
 
 ## Conclusion
 
