@@ -3115,8 +3115,8 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#breathe-in-the-data" id="toc-breathe-in-the-data" class="nav-link active" data-scroll-target="#breathe-in-the-data">Breathe (In the Data)</a></li>
-  <li><a href="#echoes-of-change" id="toc-echoes-of-change" class="nav-link" data-scroll-target="#echoes-of-change">Echoes of Change</a></li>
+  <li><a href="#echoes-of-change" id="toc-echoes-of-change" class="nav-link active" data-scroll-target="#echoes-of-change">Echoes of Change</a></li>
+  <li><a href="#breathe-in-the-data" id="toc-breathe-in-the-data" class="nav-link" data-scroll-target="#breathe-in-the-data">Breathe (In the Data)</a></li>
   <li><a href="#obscured-by-data" id="toc-obscured-by-data" class="nav-link" data-scroll-target="#obscured-by-data">Obscured by Data</a></li>
   <li><a href="#pulses-of-evolution" id="toc-pulses-of-evolution" class="nav-link" data-scroll-target="#pulses-of-evolution">Pulses of Evolution</a></li>
   <li><a href="#a-momentary-lapse-or-statistical-certainty" id="toc-a-momentary-lapse-or-statistical-certainty" class="nav-link" data-scroll-target="#a-momentary-lapse-or-statistical-certainty">A Momentary Lapse or Statistical Certainty?</a></li>
@@ -3164,6 +3164,17 @@ window.Quarto = {
 </header>
 
 
+<section id="echoes-of-change" class="level2">
+<h2 class="anchored" data-anchor-id="echoes-of-change">Echoes of Change</h2>
+<p>Music evolves as a reflection of the forces shaping its creators. Pink Floyd is a prime example of how external and internal changes influence artistic direction. Syd Barrett, the band’s original creative mastermind, is widely credited with shaping their early identity as a psychedelic rock band. However, his departure in 1968 due to mental health struggles marks a profound turning point in their history <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>In this project, I investigate whether this transformation can be quantified through measurable changes in their music. Specifically, I analyze the energy levels of their songs, a Spotify-defined metric that captures the intensity and activity <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> of a track. Energy is a useful proxy for several other musical attributes, such as mood, tempo, and instrumental variation, making it an ideal choice for tracing Pink Floyd’s evolution.</p>
+<p>I’ll focus on the following hypotheses to guide this analysis:</p>
+<ul>
+<li><p><strong>Null Hypothesis (<span class="math inline">\(H_0\)</span>):</strong> There is no significant difference in energy between Pink Floyd’s pre- and post-Barrett eras.</p></li>
+<li><p><strong>Alternative Hypothesis (<span class="math inline">\(H_1\)</span>):</strong> There is a significant decrease in energy between Pink Floyd’s pre- and post-Barrett eras.</p></li>
+</ul>
+<p>Through this lens, I aim to uncover how Barrett’s absence shaped the band’s artistic trajectory and influenced their broader legacy in music history.</p>
+</section>
 <section id="breathe-in-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="breathe-in-the-data">Breathe (In the Data)</h2>
 <div class="cell">
@@ -3192,18 +3203,7 @@ window.Quarto = {
 </details>
 </div>
 </div>
-<p>The Dataset is downloaded from Kaggle <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and originally sourced from the Spotify Web API.</p>
-</section>
-<section id="echoes-of-change" class="level2">
-<h2 class="anchored" data-anchor-id="echoes-of-change">Echoes of Change</h2>
-<p>Music evolves as a reflection of the forces shaping its creators. Pink Floyd is a prime example of how external and internal changes influence artistic direction. Syd Barrett, the band’s original creative mastermind, is widely credited with shaping their early identity as a psychedelic rock band. However, his departure in 1968 due to mental health struggles marks a profound turning point in their history <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
-<p>In this project, I investigate whether this transformation can be quantified through measurable changes in their music. Specifically, I analyze the energy levels of their songs, a Spotify-defined metric that captures the intensity and activity <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> of a track. Energy is a useful proxy for several other musical attributes, such as mood, tempo, and instrumental variation, making it an ideal choice for tracing Pink Floyd’s evolution.</p>
-<p>I’ll focus on the following hypotheses to guide this analysis:</p>
-<ul>
-<li><p>Null Hypothesis (<span class="math inline">\(H_0\)</span>): There is no significant difference in energy between Pink Floyd’s pre- and post-Barrett eras.</p></li>
-<li><p>Alternative Hypothesis (<span class="math inline">\(H_1\)</span>): There is a significant decrease in energy between Pink Floyd’s pre- and post-Barrett eras.</p></li>
-</ul>
-<p>Through this lens, I aim to uncover how Barrett’s absence shaped the band’s artistic trajectory and influenced their broader legacy in music history.</p>
+<p>The Dataset is downloaded from Kaggle <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, and originally sourced from the Spotify Web API.</p>
 </section>
 <section id="obscured-by-data" class="level2">
 <h2 class="anchored" data-anchor-id="obscured-by-data">Obscured by Data</h2>
@@ -3274,7 +3274,7 @@ window.Quarto = {
 </section>
 <section id="pulses-of-evolution" class="level2">
 <h2 class="anchored" data-anchor-id="pulses-of-evolution">Pulses of Evolution</h2>
-<p>To understand the band’s evolution, I calculate the average energy levels of their albums. This is important because Pink Floyd is known for their</p>
+<p>To understand the band’s evolution, I calculate the average energy levels of their albums. This is important because Pink Floyd is known for their album-wide storytelling, where each track contributes to a larger narrative. So it makes sense to focus on the album as a whole rather than individual songs.</p>
 <div class="cell">
 <div class="code-with-filename">
 <details class="code-fold">
@@ -3388,7 +3388,7 @@ window.Quarto = {
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-with-filename-file">
-<pre><strong></strong></pre>
+<pre><strong>calculating mean</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mean_albums <span class="ot">&lt;-</span> <span class="fu">mean</span>(pink_floyd_albums<span class="sc">$</span>Avg_Energy) <span class="co"># Calculating overall average energy level</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -3434,7 +3434,7 @@ window.Quarto = {
 </div>
 </div>
 <p>This ranking underscores the dominance of Pre-Barrett albums like <em>The Piper at the Gates of Dawn</em> and <em>A Saucerful of Secrets</em>, which sit at the high-energy end of the spectrum. Conversely, albums from the later Post-Barrett era, such as <em>The Wall</em> and <em>The Final Cut</em>, are situated at the lower-energy end, reflecting the band’s shift toward somber and reflective themes. Interestingly, the album <em>More</em> is at a unique position, aligning almost perfectly with the overall average energy level. This highlights its transitional nature as the band navigated Barrett’s absence and explored new creative directions.</p>
-<p>These patterns in energy levels provide a compelling narrative of Pink Floyd’s evolution, but to rigorously evaluate the differences between the Pre-Barrett and Post-Barrett eras, we must turn to statistical significance testing.</p>
+<p>These patterns provide a strong understanding of Pink Floyd’s evolution, matching our hypotheses of a decrease in energy levels. But to rigorously evaluate the differences between the Pre-Barrett and Post-Barrett eras, we must turn to statistical significance testing.</p>
 </section>
 <section id="a-momentary-lapse-or-statistical-certainty" class="level2">
 <h2 class="anchored" data-anchor-id="a-momentary-lapse-or-statistical-certainty">A Momentary Lapse or Statistical Certainty?</h2>
@@ -3468,20 +3468,20 @@ window.Quarto = {
 </div>
 <div class="cell-output-display">
 <div>
-<div id="pxvcpqduef" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pxvcpqduef table {
+<div id="iazqnzlohz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iazqnzlohz table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#pxvcpqduef thead, #pxvcpqduef tbody, #pxvcpqduef tfoot, #pxvcpqduef tr, #pxvcpqduef td, #pxvcpqduef th {
+#iazqnzlohz thead, #iazqnzlohz tbody, #iazqnzlohz tfoot, #iazqnzlohz tr, #iazqnzlohz td, #iazqnzlohz th {
 border-style: none;
 }
-#pxvcpqduef p {
+#iazqnzlohz p {
 margin: 0;
 padding: 0;
 }
-#pxvcpqduef .gt_table {
+#iazqnzlohz .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -3506,11 +3506,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#pxvcpqduef .gt_caption {
+#iazqnzlohz .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#pxvcpqduef .gt_title {
+#iazqnzlohz .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -3521,7 +3521,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#pxvcpqduef .gt_subtitle {
+#iazqnzlohz .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -3532,7 +3532,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#pxvcpqduef .gt_heading {
+#iazqnzlohz .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -3543,12 +3543,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#pxvcpqduef .gt_bottom_border {
+#iazqnzlohz .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#pxvcpqduef .gt_col_headings {
+#iazqnzlohz .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -3562,7 +3562,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#pxvcpqduef .gt_col_heading {
+#iazqnzlohz .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -3581,7 +3581,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#pxvcpqduef .gt_column_spanner_outer {
+#iazqnzlohz .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -3592,13 +3592,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#pxvcpqduef .gt_column_spanner_outer:first-child {
+#iazqnzlohz .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#pxvcpqduef .gt_column_spanner_outer:last-child {
+#iazqnzlohz .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#pxvcpqduef .gt_column_spanner {
+#iazqnzlohz .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -3609,10 +3609,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#pxvcpqduef .gt_spanner_row {
+#iazqnzlohz .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#pxvcpqduef .gt_group_heading {
+#iazqnzlohz .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -3637,7 +3637,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#pxvcpqduef .gt_empty_group_heading {
+#iazqnzlohz .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -3651,13 +3651,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#pxvcpqduef .gt_from_md > :first-child {
+#iazqnzlohz .gt_from_md > :first-child {
 margin-top: 0;
 }
-#pxvcpqduef .gt_from_md > :last-child {
+#iazqnzlohz .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#pxvcpqduef .gt_row {
+#iazqnzlohz .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -3675,7 +3675,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#pxvcpqduef .gt_stub {
+#iazqnzlohz .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -3687,7 +3687,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#pxvcpqduef .gt_stub_row_group {
+#iazqnzlohz .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -3700,13 +3700,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#pxvcpqduef .gt_row_group_first td {
+#iazqnzlohz .gt_row_group_first td {
 border-top-width: 2px;
 }
-#pxvcpqduef .gt_row_group_first th {
+#iazqnzlohz .gt_row_group_first th {
 border-top-width: 2px;
 }
-#pxvcpqduef .gt_summary_row {
+#iazqnzlohz .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -3715,14 +3715,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#pxvcpqduef .gt_first_summary_row {
+#iazqnzlohz .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#pxvcpqduef .gt_first_summary_row.thick {
+#iazqnzlohz .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#pxvcpqduef .gt_last_summary_row {
+#iazqnzlohz .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -3731,7 +3731,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#pxvcpqduef .gt_grand_summary_row {
+#iazqnzlohz .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -3740,7 +3740,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#pxvcpqduef .gt_first_grand_summary_row {
+#iazqnzlohz .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -3749,7 +3749,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#pxvcpqduef .gt_last_grand_summary_row_top {
+#iazqnzlohz .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -3758,10 +3758,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#pxvcpqduef .gt_striped {
+#iazqnzlohz .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#pxvcpqduef .gt_table_body {
+#iazqnzlohz .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -3769,7 +3769,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#pxvcpqduef .gt_footnotes {
+#iazqnzlohz .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -3782,7 +3782,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#pxvcpqduef .gt_footnote {
+#iazqnzlohz .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -3790,7 +3790,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#pxvcpqduef .gt_sourcenotes {
+#iazqnzlohz .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -3803,64 +3803,64 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#pxvcpqduef .gt_sourcenote {
+#iazqnzlohz .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#pxvcpqduef .gt_left {
+#iazqnzlohz .gt_left {
 text-align: left;
 }
-#pxvcpqduef .gt_center {
+#iazqnzlohz .gt_center {
 text-align: center;
 }
-#pxvcpqduef .gt_right {
+#iazqnzlohz .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#pxvcpqduef .gt_font_normal {
+#iazqnzlohz .gt_font_normal {
 font-weight: normal;
 }
-#pxvcpqduef .gt_font_bold {
+#iazqnzlohz .gt_font_bold {
 font-weight: bold;
 }
-#pxvcpqduef .gt_font_italic {
+#iazqnzlohz .gt_font_italic {
 font-style: italic;
 }
-#pxvcpqduef .gt_super {
+#iazqnzlohz .gt_super {
 font-size: 65%;
 }
-#pxvcpqduef .gt_footnote_marks {
+#iazqnzlohz .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#pxvcpqduef .gt_asterisk {
+#iazqnzlohz .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#pxvcpqduef .gt_indent_1 {
+#iazqnzlohz .gt_indent_1 {
 text-indent: 5px;
 }
-#pxvcpqduef .gt_indent_2 {
+#iazqnzlohz .gt_indent_2 {
 text-indent: 10px;
 }
-#pxvcpqduef .gt_indent_3 {
+#iazqnzlohz .gt_indent_3 {
 text-indent: 15px;
 }
-#pxvcpqduef .gt_indent_4 {
+#iazqnzlohz .gt_indent_4 {
 text-indent: 20px;
 }
-#pxvcpqduef .gt_indent_5 {
+#iazqnzlohz .gt_indent_5 {
 text-indent: 25px;
 }
-#pxvcpqduef .katex-display {
+#iazqnzlohz .katex-display {
 display: inline-flex !important;
 margin-bottom: 0.75em !important;
 }
-#pxvcpqduef div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#iazqnzlohz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
 height: 0px !important;
 }
 </style>
@@ -3891,7 +3891,7 @@ height: 0px !important;
 </div>
 </div>
 </div>
-<p>The results show a 16% reduction in average energy levels after Barrett’s departure. While this difference is visually apparent, it could still be due to chance. To validate this finding, I conducted a two-sample t-test to compare the energy levels across the two eras.</p>
+<p>The results show a 16% reduction in average energy levels after Barrett’s departure. While this difference is large enough to consider significant, it could still be due to chance. To validate this finding, I conducted a two-sample t-test to compare the energy levels across the two eras.</p>
 <div class="cell">
 <div class="code-with-filename">
 <details class="code-fold">
@@ -3924,12 +3924,11 @@ mean of x mean of y
 <p>These results allow me to confidently <strong>reject the null hypothesis</strong> that there is no difference in energy levels between the two eras. With a p-value of 0.00104, well below the threshold of 0.05, this analysis confirms that the observed reduction in energy levels is statistically significant and unlikely to be due to random chance. This suggests a genuine shift in Pink Floyd’s musical style between the eras.</p>
 <p>The t-statistic of 3.503, a measure of how much the observed difference deviates from the expectation under the null hypothesis, indicates a strong separation between the energy levels of the two eras. In real terms, this reflects a marked departure from the spontaneous, high-energy sounds to the more introspective and deliberate compositions. The confidence interval, ranging from 0.0699 to 0.2587, provides a plausible range for the true difference in mean energy levels. Even the lower bound of this interval suggests a meaningful reduction, reinforcing that the decline in energy is a consistent trend.</p>
 <p>Additionaly, the 16% difference between the average energy of the Pre-Barrett era (0.471) and the Post-Barrett era (0.307) highlights the band’s shift. This analysis highlights not only the statistical significance of the change but also its artistic implications: Pink Floyd’s evolution from Barrett’s raw, exploratory style to a more structured, thematic approach.</p>
-<p>However, significance does not imply causation. While Barrett’s departure aligns with this shift, it is essential to recognize other factors that may have contributed. These could include the natural evolution of progressive rock, the band’s responses to societal changes, or shifts in their creative direction. This highlights the importance of interpreting statistical findings within the broader context of Pink Floyd’s artistic journey.</p>
 </section>
 <section id="the-final-cut" class="level2">
 <h2 class="anchored" data-anchor-id="the-final-cut">The Final Cut</h2>
 <p>Pink Floyd’s evolution after Syd Barrett’s departure is marked by a significant decline in energy levels, reflecting a clear shift from Barrett’s vibrant and spontaneous psychedelic influence to the band’s more introspective and experimental themes. Energy, used here as a proxy for intensity, mood, and instrumental texture, reveals not just a stylistic change but a broader transformation in their approach to music. This decline highlights how the band moved away from Barrett’s raw and lively sound to explore layered, contemplative compositions that defined their later works.</p>
-<p>While the data confirms a sharp, and significant reduction in energy, this transformation cannot be solely attributed to Barrett’s absence. External factors, including the maturation of progressive rock as a genre and the band’s artistic growth, undoubtedly influenced this evolution. Still, Barrett’s departure served as a catalyst, prompting Pink Floyd to adapt and innovate in response to this pivotal moment.</p>
+<p>While the data confirms a sharp, and significant reduction in energy, this transformation cannot be solely attributed to Barrett’s absence. Significance does not imply causation. External factors, including the maturation of progressive rock as a genre and the band’s artistic growth, undoubtedly influenced this evolution. Still, Barrett’s departure served as a catalyst, prompting Pink Floyd to adapt and innovate in response to this pivotal moment.</p>
 <p>Ultimately, the observed decline in energy levels underscores Pink Floyd’s journey from a band rooted in Barrett’s influence to one that redefined itself through reinvention and resilience. By focusing on energy as a central feature, this analysis reveals how Barrett’s departure shaped the band’s artistic trajectory, paving the way for their legacy as one of rock’s most innovative and enduring acts.</p>
 </section>
 
@@ -3937,9 +3936,9 @@ mean of x mean of y
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p><a href="https://www.kaggle.com/datasets/thebumpkin/pink-floyd-all-the-tracks-with-spotify-data/data">Pink Floyd Audio Features</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p><a href="https://en.wikipedia.org/wiki/Pink_Floyd">Pink Floyd Wikipedia</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p><a href="https://developer.spotify.com/documentation/web-api/reference/get-audio-features">Spotify Web-API Docs</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p><a href="https://en.wikipedia.org/wiki/Pink_Floyd">Pink Floyd Wikipedia</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://developer.spotify.com/documentation/web-api/reference/get-audio-features">Spotify Web-API Docs</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://www.kaggle.com/datasets/thebumpkin/pink-floyd-all-the-tracks-with-spotify-data/data">Pink Floyd Audio Features</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p><a href="https://ultimateclassicrock.com/pink-floyd-album-discography/">UCR: Pink Floyd Discography</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p><a href="https://otherbrick.com/why-did-pink-floyd-break-up/">Pink Floyd’s Break Up</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p><a href="https://www.sputnikmusic.com/review/88783/Pink-Floyd-More/">SputnikMusik: More Album Review</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
