@@ -206,7 +206,7 @@ ggplot(
               color = "#e7298a" # From Dark2 Palette for accessibility
   ) +
   labs(
-    title = "Pink Floyd's Musical Evolution",
+    title = "Trend in Energy Levels by Era",
     x = "Release Year",
     y = NULL,
     color = NULL,
@@ -302,7 +302,11 @@ post_barrett <- pink_floyd$Energy[pink_floyd$Era == "Post-Barrett"]
 t.test(pre_barrett, post_barrett)
 ```
 
-These results allow me to confidently **reject the null hypothesis** that there is no difference in energy levels between the two eras. With a p-value well below the significance threshold of 0.05, this analysis confirms that the reduction in energy levels is statistically significant and unlikely to be due to random chance. 
+These results allow me to confidently **reject the null hypothesis** that there is no difference in energy levels between the two eras. With a p-value of 0.00104, well below the threshold of 0.05, this analysis confirms that the observed reduction in energy levels is statistically significant and unlikely to be due to random chance. This suggests a genuine shift in Pink Floyd’s musical style between the eras.
+
+The t-statistic of 3.503, a measure of how much the observed difference deviates from the expectation under the null hypothesis, indicates a strong separation between the energy levels of the two eras. In real terms, this reflects a marked departure from the spontaneous, high-energy sounds to the more introspective and deliberate compositions. The confidence interval, ranging from 0.0699 to 0.2587, provides a plausible range for the true difference in mean energy levels. Even the lower bound of this interval suggests a meaningful reduction, reinforcing that the decline in energy is a consistent trend.
+
+Additionaly, the 16% difference between the average energy of the Pre-Barrett era (0.471) and the Post-Barrett era (0.307) highlights the band's shift. This analysis highlights not only the statistical significance of the change but also its artistic implications: Pink Floyd’s evolution from Barrett’s raw, exploratory style to a more structured, thematic approach.
 
 However, significance does not imply causation. While Barrett’s departure aligns with this shift, it is essential to recognize other factors that may have contributed. These could include the natural evolution of progressive rock, the band’s responses to societal changes, or shifts in their creative direction. This highlights the importance of interpreting statistical findings within the broader context of Pink Floyd’s artistic journey.
 
@@ -313,10 +317,6 @@ Pink Floyd’s evolution after Syd Barrett’s departure is marked by a signific
 While the data confirms a sharp, and significant reduction in energy, this transformation cannot be solely attributed to Barrett’s absence. External factors, including the maturation of progressive rock as a genre and the band’s artistic growth, undoubtedly influenced this evolution. Still, Barrett’s departure served as a catalyst, prompting Pink Floyd to adapt and innovate in response to this pivotal moment.
 
 Ultimately, the observed decline in energy levels underscores Pink Floyd’s journey from a band rooted in Barrett’s influence to one that redefined itself through reinvention and resilience. By focusing on energy as a central feature, this analysis reveals how Barrett’s departure shaped the band’s artistic trajectory, paving the way for their legacy as one of rock’s most innovative and enduring acts.
-
-
-
-
 
 
 
