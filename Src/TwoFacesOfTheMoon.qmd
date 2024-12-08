@@ -18,13 +18,13 @@ editor_options:
 
 ## Echoes of Change
 
-Music evolves as a reflection of the forces shaping its creators. Pink Floyd is a prime example of how external and internal changes influence artistic direction. Syd Barrett, the band’s original creative mastermind, is widely credited with shaping their early identity as a psychedelic rock band. However, his departure in 1968 due to mental health struggles marks a profound turning point in their history [^2].
+Music evolves as a reflection of the forces shaping its creators. Pink Floyd is a prime example of how external and internal changes influence artistic direction. Syd Barrett, the band’s original creative mastermind, is widely credited with shaping their early identity as a psychedelic rock band. However, his departure in 1968 due to mental health struggles marks a profound turning point in their history [^1].
 
-[^2]: [Pink Floyd Wikipedia](https://en.wikipedia.org/wiki/Pink_Floyd)
+[^1]: [Pink Floyd Wikipedia](https://en.wikipedia.org/wiki/Pink_Floyd)
 
-In this project, I investigate whether this transformation can be quantified through measurable changes in their music. Specifically, I analyze the energy levels of their songs, a Spotify-defined metric that captures the intensity and activity [^3] of a track. Energy is a useful proxy for several other musical attributes, such as mood, tempo, and instrumental variation, making it an ideal choice for tracing Pink Floyd’s evolution.
+In this project, I investigate whether this transformation can be quantified through measurable changes in their music. Specifically, I analyze the energy levels of their songs, a Spotify-defined metric that captures the intensity and activity [^2] of a track. Energy is a useful proxy for several other musical attributes, such as mood, tempo, and instrumental variation, making it an ideal choice for tracing Pink Floyd’s evolution.
 
-[^3]: [Spotify Web-API Docs](https://developer.spotify.com/documentation/web-api/reference/get-audio-features)
+[^2]: [Spotify Web-API Docs](https://developer.spotify.com/documentation/web-api/reference/get-audio-features)
 
 I’ll focus on the following hypotheses to guide this analysis:
 
@@ -56,9 +56,9 @@ path <- here("Data", "PinkFloyd.csv") # path to the dataset
 pink_floyd <- read_csv(path) # loading the dataset[^1]
 ```
 
-The Dataset is downloaded from Kaggle [^1], and originally sourced from the Spotify Web API.
+The Dataset is downloaded from Kaggle [^3], and originally sourced from the Spotify Web API.
 
-[^1]: [Pink Floyd Audio Features](https://www.kaggle.com/datasets/thebumpkin/pink-floyd-all-the-tracks-with-spotify-data/data)
+[^3]: [Pink Floyd Audio Features](https://www.kaggle.com/datasets/thebumpkin/pink-floyd-all-the-tracks-with-spotify-data/data)
 
 ## Obscured by Data
 
@@ -304,9 +304,9 @@ t.test(pre_barrett, post_barrett)
 
 These results allow me to confidently **reject the null hypothesis** that there is no difference in energy levels between the two eras. With a p-value of 0.00104, well below the threshold of 0.05, this analysis confirms that the observed reduction in energy levels is statistically significant and unlikely to be due to random chance. This suggests a genuine shift in Pink Floyd’s musical style between the eras.
 
-The t-statistic of 3.503, a measure of how much the observed difference deviates from the expectation under the null hypothesis, indicates a strong separation between the energy levels of the two eras. In real terms, this reflects a marked departure from the spontaneous, high-energy sounds to the more introspective and deliberate compositions. The confidence interval, ranging from 0.0699 to 0.2587, provides a plausible range for the true difference in mean energy levels. Even the lower bound of this interval suggests a meaningful reduction, reinforcing that the decline in energy is a consistent trend.
+The t-statistic of 3.503, a measure of how much the observed difference deviates from the expectation under the null hypothesis, indicates a strong separation between the energy levels of the two eras. In real terms, this reflects a marked departure from the spontaneous, high-energy sounds to the more introspective and deliberate compositions. The confidence interval, ranging from 0.0699 to 0.2587, provides a plausible range for the true difference in mean energy levels. So even in the most conservative estimate, the reduction in energy levels remains meaningful, reinforcing the impact of the shift.
 
-Additionaly, the 16% difference between the average energy of the Pre-Barrett era (0.471) and the Post-Barrett era (0.307) highlights the band's shift. This analysis highlights not only the statistical significance of the change but also its artistic implications: Pink Floyd’s evolution from Barrett’s raw, exploratory style to a more structured, thematic approach.
+Additionally, the 16% difference between the average energy of the Pre-Barrett era (0.471) and the Post-Barrett era (0.307) highlights the band's shift. The results provide a statistical foundation for understanding Pink Floyd’s stylistic evolution.
 
 ## The Final Cut
 
